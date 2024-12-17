@@ -1,4 +1,4 @@
-import { createRouter, createRoute, query } from "@kitbag/router";
+import { createRouter, createRoute, query, path } from "@kitbag/router";
 import HomeView from "../views/HomeView.vue";
 import { sortParam } from "./params";
 import { defineAsyncComponent } from "vue";
@@ -11,8 +11,17 @@ const home = createRoute({
 
 const settings = createRoute({
   name: 'settings',
-  path: '/settings',
+  path: path('/settings/[id]', { id: Number}),
   query: 'search=[?search]',
+  onBeforeRouteEnter: (to, {replace}) => {
+    if(to.name === 'settings') {
+      // below does not work 
+      //replace('settings.profile')
+      const url = `/settings/${to.params.id}/profile`
+      console.log('url: ', url)
+      replace(url)
+    }
+  },
   component: defineAsyncComponent(() => import('../views/SettingsView.vue'))
 })
 

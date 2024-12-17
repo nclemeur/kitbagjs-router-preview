@@ -5,7 +5,7 @@ import NavigationBar from './components/NavigationBar.vue';
 <template>
   <NavigationBar>
     <router-link :to="(resolve) => resolve('home')">Home</router-link>
-    <router-link :to="(resolve) => resolve('settings')">Settings</router-link>
+    <router-link :to="(resolve) => resolve('settings', { id: 5 })">Settings</router-link>
   </NavigationBar>
   
   <router-view />
