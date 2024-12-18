@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useRoute } from '@kitbag/router';
-import NavigationBar from '../components/NavigationBar.vue';
+import NavigationBar from '../../components/NavigationBar.vue';
 
 const route = useRoute('settings')
 </script>
@@ -8,13 +8,12 @@ const route = useRoute('settings')
 <template>
   <div class="settings-view">
 
-  <NavigationBar>
-  
-    <router-link :to="(resolve) => resolve('settings.profile', {id: route.params.id})">Profile</router-link>
-    <router-link :to="(resolve) => resolve('settings.keys', {id: route.params.id})">Keys</router-link>
+  <NavigationBar>  
+    <router-link :to="(resolve) => resolve('settings.profile', route.params)">Profile</router-link>
+    <router-link :to="(resolve) => resolve('settings.keys', route.params)">Keys</router-link>
   </NavigationBar>
 
-    <h1>Settings</h1>
+    <h1>Settings {{route.params.id}}</h1>
     <p>Settings has parent routes (profile and keys) and implements useRoute with v-model on query param.</p>
 
     <input type="text" placeholder="search" v-model="route.params.search" />

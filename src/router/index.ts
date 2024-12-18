@@ -13,23 +13,28 @@ const settings = createRoute({
   name: 'settings',
   path: path('/settings/[id]', { id: Number}),
   query: 'search=[?search]',
+  onBeforeRouteUpdate: (to, {replace}) => {
+    if(to.name === 'settings') {
+      // below does not work 
+      console.log('HELLO');
+      replace('settings.profile', to.params)
+    }
+  },
   onBeforeRouteEnter: (to, {replace}) => {
     if(to.name === 'settings') {
       // below does not work 
-      //replace('settings.profile')
-      const url = `/settings/${to.params.id}/profile`
-      console.log('url: ', url)
-      replace(url)
+      console.log('HELLO');
+      replace('settings.profile', to.params)
     }
   },
-  component: defineAsyncComponent(() => import('../views/SettingsView.vue'))
+  component: defineAsyncComponent(() => import('../views/settings/SettingsView.vue'))
 })
 
 const profile = createRoute({
   parent: settings,
   name: 'settings.profile',
   path: '/profile',
-  component: defineAsyncComponent(() => import('../views/SettingsProfileView.vue'))
+  component: defineAsyncComponent(() => import('../views/settings/SettingsProfileView.vue'))
 })
 
 const keys = createRoute({
@@ -37,7 +42,7 @@ const keys = createRoute({
   name: 'settings.keys',
   path: '/keys',
   query: query('sort=[?sort]', { sort: sortParam }),
-  component: defineAsyncComponent(() => import('../views/SettingsKeysView.vue'))
+  component: defineAsyncComponent(() => import('../views/settings/SettingsKeysView.vue'))
 })
 
 export const router = createRouter([home, settings, profile, keys])
