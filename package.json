@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@kitbag/router": "0.11.1",
+    "@kitbag/router": "^0.14.0",
     "vue": "^3.4.26"
   },
   "devDependencies": {
