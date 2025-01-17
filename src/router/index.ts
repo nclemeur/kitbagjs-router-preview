@@ -1,4 +1,4 @@
-import { createRouter, createRoute, query } from "@kitbag/router";
+import { createRouter, createRoute, query, path } from "@kitbag/router";
 import HomeView from "../views/HomeView.vue";
 import { sortParam } from "./params";
 import { defineAsyncComponent } from "vue";
@@ -9,11 +9,16 @@ const home = createRoute({
   component: HomeView 
 })
 
+let d = 0;
+
 const settings = createRoute({
   name: 'settings',
-  path: '/settings',
+  path: path('/settings/[settingsId]', { settingsId: Number}),
   query: 'search=[?search]',
   component: defineAsyncComponent(() => import('../views/SettingsView.vue'))
+}, (route)=> {
+  console.log('Setting up props...', route.params.settingsId)
+  return { settingsId: route.params.settingsId + (++d)}
 })
 
 const profile = createRoute({

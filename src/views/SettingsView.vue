@@ -2,15 +2,19 @@
 import { useRoute } from '@kitbag/router';
 import NavigationBar from '../components/NavigationBar.vue';
 
+defineProps<{ settingsId: number}>();
+
 const route = useRoute('settings')
 </script>
 
 <template>
   <div class="settings-view">
 
+   Id: {{ settingsId }}
+
   <NavigationBar>
-    <router-link :to="(resolve) => resolve('settings.profile')">Profile</router-link>
-    <router-link :to="(resolve) => resolve('settings.keys')">Keys</router-link>
+    <router-link :to="(resolve) => resolve('settings.profile', { settingsId })">Profile</router-link>
+    <router-link :to="(resolve) => resolve('settings.keys', { settingsId })">Keys</router-link>
   </NavigationBar>
 
     <h1>Settings</h1>
