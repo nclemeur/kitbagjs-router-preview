@@ -9,12 +9,16 @@ const home = createRoute({
   component: HomeView 
 })
 
+let cnt = 0
 const settings = createRoute({
   name: 'settings',
   path: '/settings',
   query: 'search=[?search]',
   component: defineAsyncComponent(() => import('../views/SettingsView.vue'))
-})
+},  (route) => {
+    cnt++
+    return { prop1: cnt}    
+  })
 
 const profile = createRoute({
   parent: settings,
