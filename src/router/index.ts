@@ -1,6 +1,5 @@
-import { createRouter, createRoute, query } from "@kitbag/router";
+import { createRouter, createRoute, withParams, unionOf, withDefault } from "@kitbag/router";
 import HomeView from "../views/HomeView.vue";
-import { sortParam } from "./params";
 import { defineAsyncComponent } from "vue";
 
 const home = createRoute({ 
@@ -27,7 +26,9 @@ const keys = createRoute({
   parent: settings,
   name: 'settings.keys',
   path: '/keys',
-  query: query('sort=[?sort]', { sort: sortParam }),
+  query: withParams('sort=[?sort]', { 
+    sort: withDefault(unionOf('asc', 'desc'), 'asc') 
+  }),
   component: defineAsyncComponent(() => import('../views/SettingsKeysView.vue'))
 })
 
