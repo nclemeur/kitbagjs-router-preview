@@ -6,13 +6,19 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest --typecheck",
+    "playwright": "playwright test"
   },
   "dependencies": {
     "@kitbag/router": "0.17.7",
+    "happy-dom": "^17.0.4",
+    "vitest": "^3.0.5",
     "vue": "^3.4.26"
   },
   "devDependencies": {
+    "@playwright/test": "^1.50.1",
+    "@types/node": "^22.13.1",
     "@vitejs/plugin-vue": "^5.0.4",
     "typescript": "^5.2.2",
     "vite": "^5.2.10",

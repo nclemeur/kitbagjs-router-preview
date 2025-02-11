@@ -1,6 +1,7 @@
-import { createRouter, createRoute, withParams, unionOf, withDefault } from "@kitbag/router";
+import { createRouter, createRoute, withParams, unionOf, withDefault, RegisteredRejectionType, Register, Router, RouterOptions, Routes } from "@kitbag/router";
 import HomeView from "../views/HomeView.vue";
 import { defineAsyncComponent } from "vue";
+import LoginView from "../views/LoginView.vue";
 
 const home = createRoute({ 
   name: 'home', 
@@ -32,4 +33,16 @@ const keys = createRoute({
   component: defineAsyncComponent(() => import('../views/SettingsKeysView.vue'))
 })
 
-export const router = createRouter([home, settings, profile, keys])
+const requiresAuth = createRoute({
+  name: 'auth',
+  path: '/requires-auth',
+  onBeforeRouteEnter: (_to, { reject }) => {
+    // @ts-expect-error
+    reject('NotAuthorized')
+  },
+})
+
+export const routes = [home, settings, profile, keys, requiresAuth] as const
+export const router = createRouter(routes, {
+  rejections: { NotAuthorized: LoginView },
+})
