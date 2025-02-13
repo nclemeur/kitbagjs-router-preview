@@ -1,5 +1,11 @@
 import { test, expect } from '@playwright/test';
 
+test.only('test', async ({ page }) => {
+  await page.goto('https://github.com/stackoverfloweth')
+
+  expect(page.url()).toBe(`https://github.com/stackoverfloweth`)
+});
+
 test('initial URL works', async ({ page }) => {
   await page.goto('/');
 
