@@ -10,8 +10,7 @@ const route = useRoute('settings')
 
   <NavigationBar>
     <router-link :to="(resolve) => resolve('settings.profile')">Profile</router-link>
-    <!-- Should NOT required sort -->
-    <router-link :to="(resolve) => resolve('settings.keys', { sort: 'asc' })">Keys</router-link>
+    <router-link :to="(resolve) => resolve('settings.keys')">Keys</router-link>
   </NavigationBar>
 
     <h1>Settings</h1>
