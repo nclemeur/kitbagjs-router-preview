@@ -28,5 +28,5 @@ test('search is written to query', async ({ page, baseURL }) => {
   
   await searchInput.fill('test')
 
-  expect(page.url()).toBe(`${baseURL}/settings/keys?search=test&sort=asc`)
+  await expect(page).toHaveURL(`${baseURL}/settings/keys?search=test&sort=asc`)
 });

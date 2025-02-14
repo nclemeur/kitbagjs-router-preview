@@ -21,7 +21,7 @@ test('internal links work', async ({ page, baseURL }) => {
   
   await settingsLink.click()
 
-  expect(page.url()).toBe(`${baseURL}/settings`)
+  await expect(page).toHaveURL(`${baseURL}/settings`)
 });
 
 test('browser navigation works', async ({ page, baseURL }) => {
@@ -33,9 +33,9 @@ test('browser navigation works', async ({ page, baseURL }) => {
 
   await page.goBack()
 
-  expect(page.url()).toBe(`${baseURL}/`)
+  await expect(page).toHaveURL(`${baseURL}/`)
 
   await page.goForward()
 
-  expect(page.url()).toBe(`${baseURL}/settings`)
+  await expect(page).toHaveURL(`${baseURL}/settings`)
 });

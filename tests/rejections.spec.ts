@@ -10,5 +10,5 @@ test('router.reject renders correct component', async ({ page, baseURL }) => {
 test('router.reject does not change URL', async ({ page, baseURL }) => {
   await page.goto('/requires-auth');
 
-  expect(page.url()).toBe(`${baseURL}/requires-auth`)
+  await expect(page).toHaveURL(`${baseURL}/requires-auth`)
 });
